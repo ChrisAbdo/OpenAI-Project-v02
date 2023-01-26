@@ -17,6 +17,9 @@ module.exports = {
   theme: {
     extend: {},
   },
+  daisyui: {
+    themes: ['retro'],
+  },
   plugins: [
     function ({ matchUtilities, theme }) {
       matchUtilities(
@@ -33,7 +36,9 @@ module.exports = {
         }
       );
     },
+
     require('@tailwindcss/forms'),
     require('@headlessui/tailwindcss'),
+    require('daisyui'),
   ],
 };
