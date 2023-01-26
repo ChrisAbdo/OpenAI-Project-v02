@@ -6,7 +6,6 @@ import { useState } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
 import DropDown, { VibeType } from '../components/DropDown';
 import Footer from '../components/Footer';
-import Github from '../components/GitHub';
 import Header from '../components/Header';
 import LoadingDots from '../components/LoadingDots';
 import ResizablePanel from '../components/ResizablePanel';
@@ -14,17 +13,17 @@ import ResizablePanel from '../components/ResizablePanel';
 const Home: NextPage = () => {
   const [loading, setLoading] = useState(false);
   const [bio, setBio] = useState('');
-  const [vibe, setVibe] = useState<VibeType>('Professional');
+  const [vibe, setVibe] = useState<VibeType>('Standard');
   const [generatedBios, setGeneratedBios] = useState<String>('');
 
   console.log('Streamed response: ', generatedBios);
 
   const prompt =
-    vibe === 'Funny'
-      ? `Generate 2 funny twitter bios with no hashtags and clearly labeled "1." and "2.". Make sure there is a joke in there and it's a little ridiculous. Make sure each generated bio is at max 20 words and base it on this context: ${bio}${
+    vibe === 'Rizzlord'
+      ? `Generate 2 funny pickup lines and clearly labeled "1." and "2.". Make sure there is a joke in there and it's a little ridiculous. Make sure each generated pickup line is at max 20 words and base it on this context: ${bio}${
           bio.slice(-1) === '.' ? '' : '.'
         }`
-      : `Generate 2 ${vibe} twitter bios with no hashtags and clearly labeled "1." and "2.". Make sure each generated bio is at least 14 words and at max 20 words and base them on this context: ${bio}${
+      : `Generate 2 ${vibe} pickup lines and clearly labeled "1." and "2.". Make sure each generated pickup line is at least 14 words and at max 20 words and base them on this context: ${bio}${
           bio.slice(-1) === '.' ? '' : '.'
         }`;
 
@@ -70,7 +69,7 @@ const Home: NextPage = () => {
   return (
     <div className="flex max-w-5xl mx-auto flex-col items-center justify-center py-2 min-h-screen">
       <Head>
-        <title>Twitter Generator</title>
+        <title>SmoothTalker</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -79,7 +78,12 @@ const Home: NextPage = () => {
         <h1 className="sm:text-6xl text-4xl max-w-2xl font-bold text-slate-900">
           Generate the perfect pickup line in seconds.
         </h1>
-        <p className="text-slate-500 mt-5">18,167 bios generated so far.</p>
+        <p className="text-xl max-w-2xl text-slate-900 mt-5">
+          SmoothTalker is a GPT-3 powered app that generates the perfect pickup
+          line for you, becuz ya know...{' '}
+          <span className="font-bold">developers have no rizz.</span> Just enter
+          your matches bio and select your level of smoothness.
+        </p>
         <div className="max-w-xl">
           <div className="flex mt-10 items-center space-x-3">
             <Image
@@ -90,9 +94,9 @@ const Home: NextPage = () => {
               className="mb-5 sm:mb-0"
             />
             <p className="text-left font-medium">
-              Copy your current bio{' '}
-              <span className="text-slate-500">
-                (or write a few sentences about yourself)
+              Enter your matches bio&nbsp;
+              <span className="text-black">
+                (or any topic you want to smoothtalk your way into)
               </span>
               .
             </p>
@@ -101,14 +105,16 @@ const Home: NextPage = () => {
             value={bio}
             onChange={(e) => setBio(e.target.value)}
             rows={4}
-            className="w-full rounded-md border-gray-300 shadow-sm focus:border-black focus:ring-black my-5"
+            className="w-full rounded-md border-black shadow-sm focus:border-black focus:ring-black my-5"
             placeholder={
-              'e.g. Senior Developer Advocate @vercel. Tweeting about web development, AI, and React / Next.js. Writing nutlope.substack.com.'
+              'e.g. Love hiking. Avid movie watcher. I love to travel. I love to cook. Foodie. Book lover.'
             }
           />
           <div className="flex mb-5 items-center space-x-3">
             <Image src="/2-black.png" width={30} height={30} alt="1 icon" />
-            <p className="text-left font-medium">Select your vibe.</p>
+            <p className="text-left font-medium">
+              Select your level of smoothness.
+            </p>
           </div>
           <div className="block">
             <DropDown vibe={vibe} setVibe={(newVibe) => setVibe(newVibe)} />
@@ -119,7 +125,7 @@ const Home: NextPage = () => {
               className="bg-black rounded-xl text-white font-medium px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full"
               onClick={(e) => generateBio(e)}
             >
-              Generate your bio &rarr;
+              Generate your pickuplines &rarr;
             </button>
           )}
           {loading && (
@@ -154,11 +160,15 @@ const Home: NextPage = () => {
                       .map((generatedBio) => {
                         return (
                           <div
-                            className="bg-white rounded-xl shadow-md p-4 hover:bg-gray-100 transition cursor-copy border"
+                            className="bg-white rounded-xl shadow-md p-4 hover:bg-gray-300 transition cursor-copy border border-black"
                             onClick={() => {
                               navigator.clipboard.writeText(generatedBio);
                               toast('Bio copied to clipboard', {
                                 icon: '✂️',
+                                style: {
+                                  border: '1px solid #000',
+                                  padding: '16px',
+                                },
                               });
                             }}
                             key={generatedBio}
