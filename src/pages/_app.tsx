@@ -11,7 +11,7 @@ const poppins = Poppins({
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <div className="bg-grid-[#C6C6C6]">
+    <div className="bg-grid-[#DADDE2]">
       <main className={poppins.className}>
         <Component {...pageProps} />
         <Analytics />
