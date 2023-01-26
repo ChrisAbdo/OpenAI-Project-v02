@@ -11,12 +11,10 @@ const poppins = Poppins({
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <div className="bg-grid-[#DADDE2]">
-      <main className={poppins.className}>
-        <Component {...pageProps} />
-        <Analytics />
-      </main>
-    </div>
+    <main className={poppins.className}>
+      <Component {...pageProps} />
+      <Analytics />
+    </main>
   );
 }
 
