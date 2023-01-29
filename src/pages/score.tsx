@@ -77,7 +77,7 @@ const Home: NextPage = () => {
       <main className="flex flex-1 w-full flex-col items-center justify-center text-center px-4 ">
         {/* component goes here */}
         <h1 className="text-3xl font-bold mb-5 text-white">
-          Check your grammar and get a score
+          Check your writing and get a score
         </h1>
         <div className="max-w-xl">
           <div className="flex items-center space-x-3">
