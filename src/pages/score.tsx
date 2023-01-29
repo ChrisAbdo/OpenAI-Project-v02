@@ -100,7 +100,7 @@ const Home: NextPage = () => {
 
           {!loading && (
             <button
-              className="btn btn-secondary rounded-xl mt-6 w-full"
+              className="btn bg-[#5de5d9] text-black rounded-xl mt-6 w-full hover:bg-[#5de5d9]/80"
               onClick={(e) => generateBio(e)}
             >
               Grade my writing
@@ -124,7 +124,7 @@ const Home: NextPage = () => {
         <hr className="h-px bg-gray-700 border-1 dark:bg-gray-700" />
         <ResizablePanel>
           <AnimatePresence mode="wait">
-            <motion.div className="space-y-10 my-10 bg-base-200">
+            <motion.div className="space-y-10 my-10 bg-base-200 rounded-xl">
               {generatedBios && (
                 <>
                   <div>
