@@ -75,13 +75,6 @@ const Home: NextPage = () => {
 
       <Header />
       <main className="flex flex-1 w-full flex-col items-center justify-center text-center px-4 mt-12 sm:mt-20">
-        <h1 className="sm:text-6xl text-4xl max-w-2xl font-bold text-slate-900">
-          The AI powered DJ
-        </h1>
-        <p className="text-2xl max-w-2xl text-slate-900 mt-5">
-          GrammarScoreAI is an AI powered DJ that generates sets based on your
-          desired mood.
-        </p>
         <div className="max-w-xl">
           <div className="flex mt-10 items-center space-x-3">
             <Image
