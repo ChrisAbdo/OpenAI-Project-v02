@@ -18,7 +18,7 @@ module.exports = {
     extend: {},
   },
   daisyui: {
-    themes: ['retro'],
+    themes: ['cyberpunk'],
   },
   plugins: [
     function ({ matchUtilities, theme }) {
