@@ -8,19 +8,19 @@ class MyDocument extends Document {
           <link rel="icon" href="/favicon.ico" />
           <meta
             name="description"
-            content="Generate your next pickup line in seconds."
+            content="Grade and check your writing in seconds."
           />
           <meta property="og:site_name" />
           <meta
             property="og:description"
-            content="Generate your next pickup line in seconds."
+            content="Grade and check your writing in seconds."
           />
           <meta property="og:title" content="GrammarScoreAI" />
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:title" content="GrammarScoreAI" />
           <meta
             name="twitter:description"
-            content="Generate your next pickup line in seconds."
+            content="Grade and check your writing in seconds."
           />
         </Head>
         <body>

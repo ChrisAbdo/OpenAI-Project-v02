@@ -70,7 +70,7 @@ const Home: NextPage = () => {
   };
 
   return (
-    <div className="flex  mx-auto flex-col items-center justify-center py-2 min-h-screen">
+    <div className="flex  mx-auto flex-col items-center justify-center py-2 min-h-screen bg-grid-[#0d0d0d]">
       <Head>
         <title>GrammarScoreAI</title>
         <link rel="icon" href="/favicon.ico" />
@@ -88,10 +88,11 @@ const Home: NextPage = () => {
               style={{ width: 300, height: 300 }}
             />
             <div>
-              <h1 className="sm:text-6xl text-4xl max-w-2xl font-bold text-slate-900">
-                Your AI powered grammar checker and grader
+              <h1 className="sm:text-6xl text-4xl max-w-2xl font-bold text-white">
+                Your <span className="text-[#5de5d9]">AI powered</span> grammar
+                checker and grader
               </h1>
-              <p className="text-2xl max-w-2xl text-slate-900 mt-5">
+              <p className="text-2xl max-w-2xl text-gray-400 mt-5">
                 GrammarScoreAI is a grammar checker that uses OpenAI to{' '}
                 <span className="font-bold">check your grammar &</span>
                 <span className="font-bold">&nbsp;grade your writing.</span>

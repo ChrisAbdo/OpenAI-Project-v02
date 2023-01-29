@@ -4,7 +4,6 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { useState } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
-import DropDown, { VibeType } from '../components/DropDown';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import LoadingDots from '../components/LoadingDots';
@@ -13,19 +12,9 @@ import ResizablePanel from '../components/ResizablePanel';
 const Home: NextPage = () => {
   const [loading, setLoading] = useState(false);
   const [bio, setBio] = useState('');
-  const [vibe, setVibe] = useState<VibeType>('Standard');
   const [generatedBios, setGeneratedBios] = useState<String>('');
 
-  console.log('Streamed response: ', generatedBios);
-
-  const prompt =
-    vibe === 'Rizzlord'
-      ? `Generate 2 funny pickup lines and clearly labeled "1." and "2.". Make sure there is a joke in there and it's a little ridiculous. Make sure each generated pickup line is at max 20 words and base it on this context: ${bio}${
-          bio.slice(-1) === '.' ? '' : '.'
-        }`
-      : `Generate 2 ${vibe} pickup lines and clearly labeled "1." and "2.". Make sure each generated pickup line is at least 14 words and at max 20 words and base them on this context: ${bio}${
-          bio.slice(-1) === '.' ? '' : '.'
-        }`;
+  const prompt = `Generate a grade and some improvements for this passage: ${bio}. Clearly state the grade on one line and the feedback on the other.`;
 
   const generateBio = async (e: any) => {
     e.preventDefault();
@@ -64,77 +53,69 @@ const Home: NextPage = () => {
     }
 
     setLoading(false);
+
+    const bios = generatedBios.split('\n');
+    const grade = bios[0];
+    const feedback = bios[1];
+  };
+
+  const handleChange = (e: any) => {
+    setBio(e.target.value);
+    if (e.target.value.length >= 500) {
+      toast.error('You have reached the maximum character limit.');
+    }
   };
 
   return (
-    <div className="flex max-w-5xl mx-auto flex-col items-center justify-center py-2 min-h-screen">
+    <div className="flex mx-auto flex-col items-center justify-center py-2 min-h-screen bg-grid-[#0d0d0d]">
       <Head>
         <title>GrammarScoreAI</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <Header />
-      <main className="flex flex-1 w-full flex-col items-center justify-center text-center px-4 mt-12 sm:mt-20">
+      <main className="flex flex-1 w-full flex-col items-center justify-center text-center px-4 ">
+        {/* component goes here */}
+        <h1 className="text-3xl font-bold mb-5 text-white">
+          Check your grammar and get a score
+        </h1>
         <div className="max-w-xl">
-          <div className="flex mt-10 items-center space-x-3">
-            <Image
-              src="/1-black.png"
-              width={30}
-              height={30}
-              alt="1 icon"
-              className="mb-5 sm:mb-0"
-              priority
-            />
+          <div className="flex items-center space-x-3">
             <p className="text-left font-medium">
-              Enter your matches bio&nbsp;
-              <span className="text-black">
-                (or any topic you want to smoothtalk your way into)
-              </span>
-              .
+              <span className="font-bold text-white">Enter a text passage</span>{' '}
+              to check for grammar, spelling, and punctuation errors. You will
+              get a score and some suggestions to improve your writing.
             </p>
           </div>
           <textarea
             value={bio}
-            onChange={(e) => setBio(e.target.value)}
-            rows={4}
-            className="w-full rounded-md border-black shadow-sm focus:border-black focus:ring-black my-5"
+            onChange={handleChange}
+            rows={5}
+            maxLength={600}
+            className="w-full rounded-xl border-black shadow-sm focus:border-black focus:ring-black my-5 overflow-auto resize-none text-black"
             placeholder={
-              'e.g. Love hiking. Avid movie watcher. I love to travel. I love to cook. Foodie. Book lover.'
+              'Opera refers to a dramatic art form, originating in Europe, in which the emotional content is conveyed to the audience as much through music, both vocal and instrumental, as it is through the lyrics. By contrast, in musical theater an actors dramatic performance is primary, and the music plays a lesser role. The drama in opera is presented using the primary elements of theater such as scenery, costumes, and acting. However, the words of the opera, or libretto, are sung rather than spoken. The singers are accompanied by a musical ensemble ranging from a small instrumental ensemble to a full symphonic orchestra.'
             }
           />
-          <div className="flex mb-5 items-center space-x-3">
-            <Image
-              src="/2-black.png"
-              width={30}
-              height={30}
-              alt="1 icon"
-              priority
-            />
-            <p className="text-left font-medium">
-              Select your level of smoothness.
-            </p>
-          </div>
-          <div className="block">
-            <DropDown vibe={vibe} setVibe={(newVibe) => setVibe(newVibe)} />
-          </div>
 
           {!loading && (
             <button
-              className="bg-black rounded-xl text-white font-medium px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full"
+              className="btn btn-secondary rounded-xl mt-6 w-full"
               onClick={(e) => generateBio(e)}
             >
-              Generate your pickuplines &rarr;
+              Grade my writing
             </button>
           )}
           {loading && (
             <button
-              className="bg-black rounded-xl text-white font-medium px-4 py-2 sm:mt-10 mt-8 hover:bg-black/80 w-full"
+              className="btn btn-secondary rounded-xl mt-6 w-full bg-black"
               disabled
             >
               <LoadingDots color="white" style="large" />
             </button>
           )}
         </div>
+
         <Toaster
           position="top-center"
           reverseOrder={false}
@@ -143,38 +124,30 @@ const Home: NextPage = () => {
         <hr className="h-px bg-gray-700 border-1 dark:bg-gray-700" />
         <ResizablePanel>
           <AnimatePresence mode="wait">
-            <motion.div className="space-y-10 my-10">
+            <motion.div className="space-y-10 my-10 bg-base-200">
               {generatedBios && (
                 <>
                   <div>
-                    <h2 className="sm:text-4xl text-3xl font-bold text-slate-900 mx-auto">
-                      Your generated pickup lines
+                    <h2 className="sm:text-4xl text-3xl font-bold text-white mx-auto">
+                      Feedback
                     </h2>
                   </div>
-                  <div className="space-y-8 flex flex-col items-center justify-center max-w-xl mx-auto">
+                  <div className="space-y-8 flex flex-col items-center justify-center max-w-xl mx-auto ">
                     {generatedBios
-                      .substring(generatedBios.indexOf('1') + 3)
-                      .split('2.')
-                      .map((generatedBio) => {
-                        return (
-                          <div
-                            className="bg-white rounded-xl shadow-md p-4 hover:bg-gray-300 transition cursor-copy border border-black"
-                            onClick={() => {
-                              navigator.clipboard.writeText(generatedBio);
-                              toast('Bio copied to clipboard', {
-                                icon: '✂️',
-                                style: {
-                                  border: '1px solid #000',
-                                  padding: '16px',
-                                },
-                              });
-                            }}
-                            key={generatedBio}
-                          >
-                            <p>{generatedBio}</p>
+                      .split('\n')
+                      .filter((line) => line !== '')
+                      .map((line, index) => (
+                        <div
+                          key={index}
+                          className="flex flex-col items-center justify-center space-y-2 bg-white rounded-xl shadow-md p-4 hover:bg-gray-300 transition border border-black"
+                        >
+                          <div className="flex flex-col items-center justify-center space-y-2">
+                            <p className="text-xl font-medium text-slate-900">
+                              {line}
+                            </p>
                           </div>
-                        );
-                      })}
+                        </div>
+                      ))}
                   </div>
                 </>
               )}
