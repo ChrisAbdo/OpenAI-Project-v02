@@ -15,9 +15,9 @@ class MyDocument extends Document {
             property="og:description"
             content="Generate your next pickup line in seconds."
           />
-          <meta property="og:title" content="SmoothTalker" />
+          <meta property="og:title" content="GrammarScoreAI" />
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="SmoothTalker" />
+          <meta name="twitter:title" content="GrammarScoreAI" />
           <meta
             name="twitter:description"
             content="Generate your next pickup line in seconds."

@@ -69,7 +69,7 @@ const Home: NextPage = () => {
   return (
     <div className="flex max-w-5xl mx-auto flex-col items-center justify-center py-2 min-h-screen">
       <Head>
-        <title>SmoothTalker</title>
+        <title>GrammarScoreAI</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -79,8 +79,8 @@ const Home: NextPage = () => {
           The AI powered DJ
         </h1>
         <p className="text-2xl max-w-2xl text-slate-900 mt-5">
-          NeuralDJ is an AI powered DJ that generates sets based on your desired
-          mood.
+          GrammarScoreAI is an AI powered DJ that generates sets based on your
+          desired mood.
         </p>
         <div className="max-w-xl">
           <div className="flex mt-10 items-center space-x-3">

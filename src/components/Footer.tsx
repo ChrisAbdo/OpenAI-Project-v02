@@ -32,7 +32,7 @@ export default function Footer() {
         >
           Chris Abdo.{' '}
         </a>
-        Template from{' '}
+        Original template from{' '}
         <a
           href="https://github.com/Nutlope/twitterbio"
           target="_blank"
