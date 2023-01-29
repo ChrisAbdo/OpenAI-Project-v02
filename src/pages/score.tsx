@@ -72,7 +72,6 @@ const Home: NextPage = () => {
         <title>GrammarScoreAI</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       <Header />
       <main className="flex flex-1 w-full flex-col items-center justify-center text-center px-4 ">
         {/* component goes here */}
